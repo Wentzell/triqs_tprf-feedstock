@@ -1,16 +1,18 @@
-{% set version = "3.3.1" %}
+{% set version = "4.0.0" %}
 
 package:
   name: triqs_tprf
   version: {{ version }}
 
 source:
-  url: https://github.com/TRIQS/tprf/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 4a39648629888ec07c1a5c333ae5aa85ac04a46a7ec3b5d5d588cfe5246b7572
+  url: https://github.com/TRIQS/tprf/releases/download/{{ version }}/tprf-{{ version }}.tar.gz
+  sha256: 5bb55c38b2f4bf8e581052c69022bed0b0805ef1419c544420dee7a76d353c6f
 
 build:
-  number: 7
+  number: 0
   skip: true  # [win or py<30]
+  ignore_run_exports:
+    - libboost-devel
 
 requirements:
   build:
@@ -28,7 +30,7 @@ requirements:
     - setuptools  # [py>=312]
   host:
     - triqs {{ '.'.join(version.split('.')[:2]) }}
-    - libboost-headers
+    - libboost-devel
     - fftw
     - {{ mpi }}
     - libblas
